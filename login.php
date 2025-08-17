@@ -17,8 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         if ($password == $hashedPassword){
             $_SESSION['UserID'] = $userID;
             $_SESSION['FullName'] = $fullname;
-            echo "success"; 
-        }
+            header("Location: profile.php");
+            exit;        }
         else{
             echo "wrong password";
         }
