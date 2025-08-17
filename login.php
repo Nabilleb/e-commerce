@@ -10,6 +10,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->store_result();
+
+    if ($stmt->num_rows > 0){
+        $stmt->bind_result($userID, $hashedPassword, $fullname);
+        $stmt->fetch();
+        if ($password == $hashedPassword){
+            $_SESSION['UserID'] = $userID;
+            $_SESSION['FullName'] = $fullname;
+            echo "success"; 
+        }
+        else{
+            echo "wrong password";
+        }
+    }else{
+        echo "no account found";
+    }
 }
 ?>
 
