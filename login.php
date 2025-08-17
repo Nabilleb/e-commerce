@@ -1,0 +1,11 @@
+<?php
+session_start();
+include "connect.php";
+?>
+
+<form method="post">
+    <h2>Login</h2>
+    Email: <input type="email" name="email" required><br>
+    Password: <input type="password" name="password" required><br>
+    <button type="submit">Login</button>
+</form>
