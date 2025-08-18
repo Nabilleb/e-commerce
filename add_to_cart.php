@@ -9,7 +9,7 @@ if (!isset($_SESSION['UserID'])){
 
 $userID = $_SESSION['UserID'];
 $productID = intval($_GET['id']); 
-$quantity = isset($_GET['qty']) ? intval($_GET['qty']) : 1
+$quantity = isset($_GET['qty']) ? intval($_GET['qty']) : 1;
 
 $cartCheck = $conn->prepare("SELECT CartID FROM Carts WHERE UserID = ?");
 $cartCheck->bind_param("i", $userID);
@@ -37,7 +37,7 @@ if ($itemCheck->fetch()) {
     $update = $conn->prepare("UPDATE CartItems SET Quantity = ? WHERE CartItemID = ?");
     $update->bind_param("ii", $newQty, $cartItemID);
     $update->execute();
-    $update->close();
+    $update->close();}
     else{
      $itemCheck->close();
     $insert = $conn->prepare("INSERT INTO CartItems (CartID, ProductID, Quantity) VALUES (?, ?, ?)");
@@ -47,5 +47,5 @@ if ($itemCheck->fetch()) {
     }
     header("Location: cart.php");
     exit;
-}
+
 ?>
