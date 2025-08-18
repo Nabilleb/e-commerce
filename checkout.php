@@ -37,4 +37,11 @@ $orderStmt->bind_param("id", $userID, $total);
 $orderStmt->execute();
 $orderID = $orderStmt->insert_id;
 $orderStmt->close();
+
+$itemStmt = $conn->prepare("INSERT INTO OrderItems (OrderID, ProductID, Quantity, UnitPrice) VALUES (?, ?, ?, ?)");
+foreach ($items as $item) {
+    $itemStmt->bind_param("iiid", $orderID, $item['ProductID'], $item['Quantity'], $item['Price']);
+    $itemStmt->execute();
+}
+$itemStmt->close();
 ?>
