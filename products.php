@@ -1,3 +1,4 @@
+<a href="profile.php">Back to Profile</a>
 <?php
 include "connect.php";
 
@@ -32,3 +33,4 @@ echo "<form method='get'>
     echo "</div>";
 }   
 ?>
+

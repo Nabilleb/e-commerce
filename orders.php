@@ -1,3 +1,4 @@
+<a href="profile.php">Back to Profile</a>
 <?php
 session_start();
 include "connect.php";

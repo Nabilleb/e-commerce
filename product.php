@@ -1,3 +1,4 @@
+<a href="profile.php">Back to Profile</a>
 <?php
 include "connect.php";
 if (!isset($_GET['id'])) {
@@ -24,3 +25,4 @@ echo "<p>Price: $" . $product['Price'] . "</p>";
 echo "<p>Stock: " . $product['Stock'] . "</p>";
 echo "<a href='add_to_cart.php?id=" . $product['ProductID'] . "'>Add to Cart</a>";
 ?>
+

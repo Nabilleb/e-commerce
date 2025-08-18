@@ -15,3 +15,4 @@ while ($row = $result->fetch_assoc()) {
          . htmlspecialchars($row['CategoryName']) . "</a><br>";
 }
 ?>
+<a href="profile.php">Back to Profile</a>
