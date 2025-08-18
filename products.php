@@ -13,4 +13,13 @@ if (!empty($keyword)){
         $keywordEscaped = $conn->real_escape_string($keyword);
         $sql .= " AND (ProductName LIKE '%$keywordEscaped%' OR Description LIKE '%$keywordEscaped%')"
 }
+
+$result = $conn->query($sql);
+
+echo "<h2>Products</h2>";
+
+echo "<form method='get'>
+        Search: <input type='text' name='search' value='" . htmlspecialchars($keyword) . "'>
+        <button type='submit'>Go</button>
+      </form>";
 ?>
