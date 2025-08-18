@@ -44,4 +44,13 @@ foreach ($items as $item) {
     $itemStmt->execute();
 }
 $itemStmt->close();
+
+$clearStmt = $conn->prepare("DELETE FROM CartItems WHERE CartID IN (SELECT CartID FROM Carts WHERE UserID = ?)");
+$clearStmt->bind_param("i", $userID);
+$clearStmt->execute();
+$clearStmt->close();
+
+echo "<h2>Order placed successfully!</h2>";
+echo "<p>Your Order ID: $orderID</p>";
+echo "<a href='orders.php'>View your orders</a>";
 ?>
