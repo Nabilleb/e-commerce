@@ -13,6 +13,23 @@ $stmt->execute();
 $stmt->bind_result($name, $desc, $price, $stock, $category);
 $stmt->fetch();
 $stmt->close();
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $name = $_POST['name'];
+    $desc = $_POST['description'];
+    $price = $_POST['price'];
+    $stock = $_POST['stock'];
+    $category = $_POST['category'];
+
+    $stmt = $conn->prepare("UPDATE Products SET ProductName=?, Description=?, Price=?, Stock=?, CategoryID=? WHERE ProductID=?");
+    $stmt->bind_param("ssdiis", $name, $desc, $price, $stock, $category, $id);
+
+    if ($stmt->execute()) {
+        echo "Product updated! <a href='manage_products.php'>Back to Manage</a>";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+}
 ?>
 
 
