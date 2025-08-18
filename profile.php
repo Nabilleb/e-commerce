@@ -25,4 +25,10 @@ $stmt->close();
     <li><a href="orders.php">My Orders</a></li>
 </ul>
 
+<h3>Product Management</h3>
+<ul>
+    <li><a href="add_product.php">Add Product</a></li>
+    <li><a href="manage_products.php">Manage Products</a></li>
+</ul>
+
 <a href="logout.php">Logout</a>
