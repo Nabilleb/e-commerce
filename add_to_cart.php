@@ -30,4 +30,22 @@ $itemCheck = $conn->prepare("SELECT CartItemID, Quantity FROM CartItems WHERE Ca
 $itemCheck->bind_param("ii", $cartID, $productID);
 $itemCheck->execute();
 $itemCheck->bind_result($cartItemID, $currentQty);
+
+if ($itemCheck->fetch()) {
+      $itemCheck->close();
+    $newQty = $currentQty + $quantity;
+    $update = $conn->prepare("UPDATE CartItems SET Quantity = ? WHERE CartItemID = ?");
+    $update->bind_param("ii", $newQty, $cartItemID);
+    $update->execute();
+    $update->close();
+    else{
+     $itemCheck->close();
+    $insert = $conn->prepare("INSERT INTO CartItems (CartID, ProductID, Quantity) VALUES (?, ?, ?)");
+    $insert->bind_param("iii", $cartID, $productID, $quantity);
+    $insert->execute();
+    $insert->close();
+    }
+    header("Location: cart.php");
+    exit;
+}
 ?>
