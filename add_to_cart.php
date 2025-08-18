@@ -17,4 +17,17 @@ $cartCheck->execute();
 $cartCheck->bind_result($cartID);
 $cartCheck->fetch();
 $cartCheck->close();
+
+if(!$cartID){
+    $stmt = $conn->prepare("INSERT INTO Carts (UserID) VALUES (?)");
+    $stmt->bind_param("i", $userID);
+    $stmt->execute();
+    $cartID = $stmt->insert_id;
+    $stmt->close();
+}
+
+$itemCheck = $conn->prepare("SELECT CartItemID, Quantity FROM CartItems WHERE CartID = ? AND ProductID = ?");
+$itemCheck->bind_param("ii", $cartID, $productID);
+$itemCheck->execute();
+$itemCheck->bind_result($cartItemID, $currentQty);
 ?>
