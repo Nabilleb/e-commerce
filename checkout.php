@@ -31,4 +31,10 @@ while($row = $result->fetch_assoc()){
     $total += $subtotal;
     $items[] = $row;
 }
+
+$orderStmt = $conn->prepare("INSERT INTO Orders (UserID, TotalAmount) VALUES (?,?)");
+$orderStmt->bind_param("id", $userID, $total);
+$orderStmt->execute();
+$orderID = $orderStmt->insert_id;
+$orderStmt->close();
 ?>
