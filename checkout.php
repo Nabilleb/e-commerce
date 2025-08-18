@@ -23,4 +23,12 @@ if ($result->num_rows === 0) {
     echo "Your cart is empty. <a href='categories.php'>Shop now</a>";
     exit;
 }
+$total = 0;
+$items = [];
+
+while($row = $result->fetch_assoc()){
+ $subtotal = $row['Price'] * $row['Quantity'];
+    $total += $subtotal;
+    $items[] = $row;
+}
 ?>
