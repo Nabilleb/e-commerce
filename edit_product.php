@@ -6,7 +6,13 @@ if(!isset($_SESSION['UserID'])){
     header("Location: login.php");
     exit;
 }
-
+$id = intval($_GET['id']);
+$stmt = $conn->prepare("SELECT ProductName, Description, Price, Stock, CategoryID FROM Products WHERE ProductID=?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$stmt->bind_result($name, $desc, $price, $stock, $category);
+$stmt->fetch();
+$stmt->close();
 ?>
 
 
