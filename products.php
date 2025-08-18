@@ -6,12 +6,12 @@ $keyword = isset($_GET['search']) ? $_GET['search'] : "";
 
 $sql = "SELECT * FROM Products WHERE IsActive = 1";
 if ($categoryID > 0){
-    $sql .= "AND CategoryID = $categoryID";
+    $sql .= " AND CategoryID = $categoryID";
 }
 
 if (!empty($keyword)){
         $keywordEscaped = $conn->real_escape_string($keyword);
-        $sql .= " AND (ProductName LIKE '%$keywordEscaped%' OR Description LIKE '%$keywordEscaped%')"
+        $sql .= " AND (ProductName LIKE '%$keywordEscaped%' OR Description LIKE '%$keywordEscaped%')";
 }
 
 $result = $conn->query($sql);
@@ -22,4 +22,13 @@ echo "<form method='get'>
         Search: <input type='text' name='search' value='" . htmlspecialchars($keyword) . "'>
         <button type='submit'>Go</button>
       </form>";
+
+      while ($row = $result->fetch_assoc()) {
+    echo "<div style='border:1px solid #ccc; padding:10px; margin:10px;'>";
+    echo "<h3><a href='product.php?id=" . $row['ProductID'] . "'>" 
+         . htmlspecialchars($row['ProductName']) . "</a></h3>";
+    echo "<p>" . htmlspecialchars($row['Description']) . "</p>";
+    echo "<p>Price: $" . $row['Price'] . "</p>";
+    echo "</div>";
+}   
 ?>
